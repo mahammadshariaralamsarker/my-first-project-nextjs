@@ -1,7 +1,24 @@
-import Image from "next/image";
+import React from 'react';
 
-export default function Home() {
+const Home = async() => {
+  const res = await fetch('http://localhost:5000/posts');
+  const posts = await res.json()
+  console.log(posts);
   return (
-    <div>This is home page for Next js </div>
+    <div>
+      {
+        posts.map((item) => (
+          < >
+          <div className='flex'>
+          <h1 className='text-black'>id:{item.id}</h1>
+          <h1 key={item.id} className='text-black px-3'>{item.title}</h1>
+          </div>
+          </>
+        ))
+      }
+      <h1 className='text-black'>shs</h1>
+    </div>
   );
-}
+};
+
+export default Home;
